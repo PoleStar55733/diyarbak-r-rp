@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DiyarbakırRP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --accent:#e63946; --accent2:#ff6b35;
+      --bg:#0a0a0f; --card:#12121a; --card2:#1a1a28;
+      --border:#2a2a40; --text:#e8e8f0; --muted:#6b6b8a;
+    }
+    /* AYDINLIK TEMA */
+    body.light{
+      --bg:#f0f0f5; --card:#ffffff; --card2:#e8e8f0;
+      --border:#d0d0e0; --text:#1a1a2e; --muted:#7a7a9a;
+    }
+    body.light::before{background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(230,57,70,.06) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(255,107,53,.04) 0%,transparent 60%);}
+    body.light nav{background:rgba(240,240,245,.92);}
+    body.light .nav-links{background:var(--bg);}
+    /* TEMA BUTONU */
+    .theme-btn{background:none;border:1px solid var(--border);color:var(--text);border-radius:7px;padding:6px 11px;cursor:pointer;font-size:1rem;transition:border-color .2s;flex-shrink:0}
+    .theme-btn:hover{border-color:var(--accent)}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 10%,rgba(230,57,70,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 40% at 80% 80%,rgba(255,107,53,.08) 0%,transparent 60%);pointer-events:none;z-index:0}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px;background:rgba(10,10,15,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .nav-logo{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:900;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px;white-space:nowrap}
+    .nav-links{display:flex;gap:24px;flex-wrap:wrap}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:color .2s}
+    .nav-links a:hover{color:var(--accent)}
+    .nav-menu-btn{display:none;background:none;border:1px solid var(--border);color:var(--text);border-radius:7px;padding:6px 12px;cursor:pointer;font-size:1.1rem}
+
+    /* SECTIONS */
+    section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:80px 24px}
+    .section-label{font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+    .section-title{font-family:'Orbitron',sans-serif;font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;margin-bottom:48px}
+    .divider{width:100%;height:1px;background:var(--border)}
+
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:10px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;text-decoration:none;border:none;transition:transform .15s,box-shadow .15s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 24px rgba(230,57,70,.35)}
+    .btn-primary:hover{box-shadow:0 8px 32px rgba(230,57,70,.5)}
+    .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+    .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+    .btn-discord{background:#5865F2;color:#fff;box-shadow:0 4px 24px rgba(88,101,242,.4)}
+    .btn-discord:hover{box-shadow:0 8px 32px rgba(88,101,242,.6)}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+
+    /* HERO */
+    .hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 60px}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(230,57,70,.12);border:1px solid rgba(230,57,70,.3);border-radius:999px;padding:6px 18px;font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:28px;animation:fadeUp .6s ease both}
+    .hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.5s infinite}
+    .hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(2.8rem,10vw,6.5rem);font-weight:900;line-height:1;letter-spacing:-2px;background:linear-gradient(135deg,#fff 30%,var(--accent) 70%,var(--accent2) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fadeUp .7s ease .1s both}
+    .hero-sub{margin-top:20px;font-size:1.2rem;color:var(--muted);max-width:480px;animation:fadeUp .7s ease .2s both}
+    .owner-chip{margin-top:36px;display:inline-flex;align-items:center;gap:12px;background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:14px 28px;animation:fadeUp .7s ease .3s both}
+    .owner-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:900;color:#fff}
+    .owner-info{text-align:left}
+    .owner-label{font-size:.7rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+    .owner-name{font-size:1.1rem;font-weight:700}
+    .hero-btns{margin-top:48px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center;animation:fadeUp .7s ease .4s both}
+
+    /* BANNER */
+    #ann-banner{position:fixed;top:64px;left:0;right:0;z-index:190;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;padding:9px 20px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:.88rem;font-weight:600;letter-spacing:.5px;transform:translateY(-100%);transition:transform .4s ease;cursor:pointer}
+    #ann-banner.show{transform:translateY(0)}
+    #ann-banner .close-banner{margin-left:auto;background:none;border:none;color:#fff;cursor:pointer;font-size:1.1rem;opacity:.8;padding:0 4px}
+    body.banner-active .hero{padding-top:160px}
+
+    /* KARAKTERLEr */
+    .char-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+    .char-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 22px;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+    .char-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+    .char-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+    .char-emoji{font-size:2.4rem;margin-bottom:12px}
+    .char-name{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:900;margin-bottom:6px}
+    .char-desc{color:var(--muted);font-size:.9rem;line-height:1.5;margin-bottom:14px}
+    .char-slots{font-size:.72rem;letter-spacing:2px;text-transform:uppercase}
+
+    /* HARİTA */
+    .map-box{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;position:relative}
+    .map-img{width:100%;display:block;max-height:520px;object-fit:cover}
+    .map-placeholder{width:100%;height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted)}
+    .map-placeholder .mp-icon{font-size:3rem}
+    .map-placeholder .mp-text{font-size:.85rem;letter-spacing:2px;text-transform:uppercase}
+    .map-label{position:absolute;bottom:0;left:0;right:0;padding:18px 24px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:.95rem;font-weight:700}
+    .stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+    .stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;transition:border-color .2s,transform .2s}
+    .stat-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+    .stat-num{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .stat-label{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+    /* DUYURULAR */
+    .announcements-list{display:flex;flex-direction:column;gap:16px}
+    .ann-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 28px;display:flex;gap:20px;align-items:flex-start;transition:border-color .2s}
+    .ann-card:hover{border-color:var(--accent)}
+    .ann-icon{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+    .ann-body{}
+    .ann-date{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+    .ann-title{font-size:1.1rem;font-weight:700;margin-bottom:6px}
+    .ann-text{color:var(--muted);font-size:.95rem;line-height:1.5}
+
+    /* KURALLAR */
+    .rules-list{display:flex;flex-direction:column;gap:12px;counter-reset:rule}
+    .rule-item{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 24px;display:flex;gap:16px;align-items:flex-start;transition:border-color .2s}
+    .rule-item:hover{border-color:var(--accent)}
+    .rule-num{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;color:var(--accent);min-width:32px;flex-shrink:0;line-height:1}
+    .rule-text{font-size:1rem;line-height:1.5;color:var(--text)}
+    .rule-cat{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+
+    /* SSS */
+    .faq-list{display:flex;flex-direction:column;gap:10px}
+    .faq-item{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s}
+    .faq-item.open{border-color:var(--accent)}
+    .faq-q{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;font-size:1rem;font-weight:700;gap:12px}
+    .faq-q::after{content:'▸';color:var(--accent);transition:transform .2s;flex-shrink:0}
+    .faq-item.open .faq-q::after{transform:rotate(90deg)}
+    .faq-a{display:none;padding:0 24px 20px;color:var(--muted);line-height:1.6;font-size:.95rem}
+    .faq-item.open .faq-a{display:block}
+
+    /* GALERİ */
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+    .gallery-item{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;aspect-ratio:16/9;cursor:pointer;transition:transform .2s,border-color .2s;position:relative}
+    .gallery-item:hover{transform:scale(1.02);border-color:var(--accent)}
+    .gallery-item img{width:100%;height:100%;object-fit:cover}
+    .gallery-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--muted);font-size:2rem}
+    .gallery-placeholder span{font-size:.8rem;letter-spacing:2px;text-transform:uppercase}
+    .gallery-label{position:absolute;bottom:0;left:0;right:0;padding:10px 14px;background:linear-gradient(transparent,rgba(0,0,0,.8));font-size:.85rem;font-weight:600}
+
+    /* LİDERLİK */
+    .leaderboard{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+    .lb-header{display:grid;grid-template-columns:60px 1fr 120px 120px;padding:14px 24px;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border)}
+    .lb-row{display:grid;grid-template-columns:60px 1fr 120px 120px;padding:16px 24px;border-bottom:1px solid var(--border);align-items:center;transition:background .15s}
+    .lb-row:last-child{border-bottom:none}
+    .lb-row:hover{background:rgba(255,255,255,.03)}
+    .lb-rank{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:900}
+    .lb-rank.gold{color:#f1c40f} .lb-rank.silver{color:#bdc3c7} .lb-rank.bronze{color:#cd7f32}
+    .lb-player{display:flex;align-items:center;gap:12px}
+    .lb-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:900;color:#fff}
+    .lb-name{font-weight:700}
+    .lb-score{font-family:'Orbitron',sans-serif;font-size:.95rem;font-weight:700;color:var(--accent);text-align:right}
+    .lb-time{font-size:.85rem;color:var(--muted);text-align:right}
+
+    /* BAŞVURU */
+    .apply-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:48px 40px;max-width:640px;margin:0 auto}
+    .apply-box h3{font-family:'Orbitron',sans-serif;font-size:1.4rem;margin-bottom:8px}
+    .apply-box .sub{color:var(--muted);margin-bottom:32px;line-height:1.5}
+    .form-group{margin-bottom:20px}
+    .form-group label{display:block;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+    .form-group input,.form-group textarea,.form-group select{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:12px 16px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:1rem;outline:none;transition:border-color .2s;resize:vertical}
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent)}
+    .form-group textarea{min-height:100px}
+    .form-success{display:none;text-align:center;padding:32px;color:#2ecc71;font-size:1.1rem;font-weight:700}
+
+    /* DESTEK EKİBİ */
+    .staff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+    .staff-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px 20px;text-align:center;transition:border-color .2s,transform .2s}
+    .staff-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+    .staff-av{width:60px;height:60px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;color:#fff}
+    .staff-name{font-size:1.05rem;font-weight:700}
+    .staff-role{font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px}
+
+    /* DİSCORD */
+    .discord-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:60px 40px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px}
+    .discord-icon{width:72px;height:72px;background:#5865F2;border-radius:20px;display:flex;align-items:center;justify-content:center}
+    .discord-icon svg{width:42px;height:42px;fill:#fff}
+    .discord-box h3{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900}
+    .discord-box p{color:var(--muted);max-width:420px;line-height:1.6}
+
+    /* FOOTER */
+    footer{position:relative;z-index:1;border-top:1px solid var(--border);text-align:center;padding:32px 24px;color:var(--muted);font-size:.88rem}
+    footer span{color:var(--accent)}
+
+    /* LIGHTBOX */
+    #lightbox{display:none;position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.92);align-items:center;justify-content:center;cursor:pointer}
+    #lightbox.open{display:flex}
+    #lightbox img{max-width:90vw;max-height:85vh;border-radius:12px;object-fit:contain}
+
+    /* ADMIN PANEL */
+    #admin-panel{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.8);backdrop-filter:blur(6px);align-items:center;justify-content:center}
+    #admin-panel.open{display:flex}
+    .admin-box{background:var(--card2);border:1px solid var(--border);border-radius:20px;padding:36px;width:100%;max-width:680px;max-height:90vh;overflow-y:auto}
+    .admin-box h2{font-family:'Orbitron',sans-serif;font-size:1.3rem;margin-bottom:6px;color:var(--accent)}
+    .admin-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;margin-top:16px}
+    .admin-tab{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:7px 16px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:all .2s}
+    .admin-tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+    .admin-tab-content{display:none}
+    .admin-tab-content.active{display:block}
+    .admin-section{margin-bottom:20px}
+    .admin-section label{display:block;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+    .admin-section input,.admin-section textarea,.admin-section select{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:.95rem;outline:none;transition:border-color .2s;resize:vertical}
+    .admin-section input:focus,.admin-section textarea:focus,.admin-section select:focus{border-color:var(--accent)}
+    .list-edit{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+    .list-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .list-row input{flex:1;min-width:80px}
+    .btn-remove{background:rgba(230,57,70,.15);border:1px solid var(--accent);color:var(--accent);border-radius:7px;padding:7px 11px;cursor:pointer;font-size:.82rem;font-family:'Rajdhani',sans-serif;font-weight:700;flex-shrink:0}
+    .btn-add{background:transparent;border:1px dashed var(--border);color:var(--muted);border-radius:8px;padding:9px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:.88rem;width:100%;transition:border-color .2s,color .2s}
+    .btn-add:hover{border-color:var(--accent);color:var(--accent)}
+    .admin-btns{display:flex;gap:12px;justify-content:flex-end;margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+
+    #secret-trigger{position:fixed;bottom:0;right:0;width:60px;height:60px;z-index:500;cursor:default}
+
+    /* BAŞVURU KARTLARI */
+    .app-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:12px}
+    .app-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    .app-card-name{font-weight:700;font-size:1rem}
+    .app-card-role{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:rgba(230,57,70,.15);color:var(--accent)}
+    .app-card-role.builder{background:rgba(255,107,53,.15);color:var(--accent2)}
+    .app-card-date{font-size:.72rem;color:var(--muted);margin-bottom:10px}
+    .app-qa{margin-top:6px}
+    .app-q{font-size:.75rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:8px}
+    .app-a{font-size:.9rem;color:var(--text);line-height:1.4}
+    .app-empty{text-align:center;color:var(--muted);padding:32px;font-size:.95rem}
+
+    /* MOBILE */
+    @media(max-width:700px){
+      nav{padding:0 16px}
+      .nav-links{display:none;position:fixed;top:64px;left:0;right:0;background:var(--bg);border-bottom:1px solid var(--border);flex-direction:column;padding:20px 24px;gap:18px;z-index:199}
+      .nav-links.open{display:flex}
+      .nav-menu-btn{display:block}
+      .lb-header,.lb-row{grid-template-columns:50px 1fr 80px}
+      .lb-time{display:none}
+      .apply-box{padding:28px 18px}
+      .discord-box{padding:36px 18px}
+      .admin-box{padding:20px 16px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================================================
+  AYARLAR - Buradan her şeyi kolayca düzenleyebilirsin
+================================================ -->
+<script>
+const CONFIG = {
+  /* TEMEL */
+  gameName:    "DiyarbakırRP",
+  gameDesc:    "Diyarbakır'ın en gerçekçi roleplay deneyimi. Kurallara uy, karakterini yaşat.",
+  ownerRoblox: "PoleStar5573",
+  discordLink: "https://discord.gg/ud3yVVJd",
+  robloxLink:  "https://www.roblox.com/tr/communities/32330674/PoleStar-development#!/about",
+
+  /* İSTATİSTİKLER */
+  stats: [
+    { num: "1.2K+", label: "Aktif Oyuncu" },
+    { num: "50+",   label: "Günlük Oturum"  },
+    { num: "99%",   label: "Uptime"         },
+    { num: "24/7",  label: "Destek"         }
+  ],
+
+  /* DUYURULAR — emoji + tarih + başlık + metin */
+  announcements: [
+    { emoji:"📢", date:"14 Nisan 2025", title:"Sunucu Açıldı!", text:"DiyarbakırRP sunucusu resmen açıldı. Herkesi bekliyoruz!" },
+    { emoji:"🛠️", date:"13 Nisan 2025", title:"Güncelleme v1.1", text:"Yeni araç seti ve bölge haritası güncellendi." },
+    { emoji:"🎉", date:"10 Nisan 2025", title:"Moderatör Başvuruları", text:"Moderatör başvuruları başladı! Aşağıdaki formdan başvurabilirsin." }
+  ],
+
+  /* SUNUCU KURALLARI */
+  rules: [
+    { cat:"Genel",    text:"Saygısız davranış yasaktır. Herkese karşı nazik ol." },
+    { cat:"Roleplay", text:"Karakter dışı (OOC) konuşmalar oyun içinde yapılamaz." },
+    { cat:"Roleplay", text:"RDM (Random Death Match) kesinlikle yasaktır." },
+    { cat:"Araç",     text:"Araçları kuralsız kullanmak yasaktır." },
+    { cat:"Genel",    text:"Hile, exploit veya bug abuse yasaktır." },
+    { cat:"Genel",    text:"Reklam yapmak yasaktır." },
+    { cat:"Roleplay", text:"Yönetici kararlarına uymak zorunludur." }
+  ],
+
+  /* SSS */
+  faq: [
+    { q:"Oyuna nasıl katılabilirim?",             a:"Yukarıdaki 'Oyunu Oyna' butonuna tıklayarak Roblox üzerinden katılabilirsin." },
+    { q:"Moderatör olmak için ne yapmalıyım?",    a:"Aşağıdaki başvuru formunu doldurman gerekiyor. Başvurular incelendikten sonra sana Discord üzerinden dönülür." },
+    { q:"Ban yedim, ne yapabilirim?",             a:"Discord sunucumuza katılıp destek kanalından yetkililere ulaşabilirsin." },
+    { q:"Sunucu hangi saatlerde aktif?",          a:"Sunucu 7/24 açıktır ancak en yoğun saatler 15:00–23:00 arası." },
+    { q:"Hata veya bug buldum, ne yapayım?",      a:"Discord sunucusundaki bug-report kanalına bildir, en kısa sürede düzeltilecektir." }
+  ],
+
+  /* GALERİ — gerçek fotoğraf URL'si yazabilirsin, boş bırakırsan placeholder gösterir */
+  gallery: [
+    { url:"", label:"Şehir Merkezi"   },
+    { url:"", label:"Polis Merkezi"   },
+    { url:"", label:"Çarşı Alanı"     },
+    { url:"", label:"Otoban"          },
+    { url:"", label:"Gece Görünümü"   },
+    { url:"", label:"Etkinlik Alanı"  }
+  ],
+
+  /* LİDERLİK TABLOSU */
+  leaderboard: [
+    { name:"PoleStar5573", score:9850, time:"142 saat", color:"#e63946" },
+    { name:"Oyuncu2",      score:7420, time:"98 saat",  color:"#5865F2" },
+    { name:"Oyuncu3",      score:5900, time:"75 saat",  color:"#2ecc71" },
+    { name:"Oyuncu4",      score:4310, time:"60 saat",  color:"#f1c40f" },
+    { name:"Oyuncu5",      score:3780, time:"54 saat",  color:"#ff6b35" }
+  ],
+
+  /* DESTEK EKİBİ */
+  staff: [
+    { name:"PoleStar5573",  role:"Kurucu",       color:"#e63946" },
+    { name:"KullaniciAdi2", role:"Yönetici",     color:"#ff6b35" },
+    { name:"KullaniciAdi3", role:"Destek Ekibi", color:"#2ecc71" }
+  ],
+
+  /* HARİTA */
+  mapUrl:   "",  // Harita görsel URL'si (boş bırakılırsa placeholder görünür)
+  mapLabel: "DiyarbakırRP Sunucu Haritası",
+
+  /* KARAKTER SİSTEMİ */
+  characters: [
+    { emoji:"👮", name:"Polis", color:"#3498db", desc:"Şehrin güvenliğini sağlar, suçluları yakalar, trafik denetimi yapar ve halkın güvenliğini korur.", slots:"Mevcut Slot: 10" },
+    { emoji:"🛡️", name:"Yetkili", color:"#e63946", desc:"Sunucu düzenini sağlar, kurallara uymayan oyuncuları uyarır ve gerektiğinde yaptırım uygular.", slots:"Mevcut Slot: 5" },
+  ],
+
+  /* BAŞVURU FORMU */
+  applyTitle: "Moderatör / Yetkili Başvurusu",
+  applySub:   "Başvurunu doldur, ekibimiz en kısa sürede Discord üzerinden sana ulaşsın."
+};
+
+const ADMIN_PASSWORD = "1453";
+</script>
+
+<!-- DUYURU BANNER -->
+<div id="ann-banner" onclick="scrollToDuyuru()">
+  <span>📢</span>
+  <span id="banner-text">Son duyuru yükleniyor...</span>
+  <button class="close-banner" onclick="closeBanner(event)">✕</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" id="nav-logo"></div>
+  <div class="nav-links" id="nav-links">
+    <a href="#duyurular">Duyurular</a>
+    <a href="#kurallar">Kurallar</a>
+    <a href="#karakterler">Karakterler</a>
+    <a href="#harita">Harita</a>
+    <a href="#sss">SSS</a>
+    <a href="#galeri">Galeri</a>
+    <a href="#liderlik">Liderlik</a>
+    <a href="#destek">Ekip</a>
+    <a href="#basvuru">Başvuru</a>
+    <a href="#discord">Discord</a>
+    <a id="roblox-nav" href="#" target="_blank">Oyna</a>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="Tema değiştir">🌙</button>
+    <button class="nav-menu-btn" onclick="toggleMenu()">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Roblox Roleplay</div>
+  <h1 id="hero-title"></h1>
+  <p class="hero-sub" id="hero-desc"></p>
+  <div class="owner-chip">
+    <div class="owner-avatar" id="owner-av"></div>
+    <div class="owner-info">
+      <div class="owner-label">Kurucu</div>
+      <div class="owner-name" id="owner-name"></div>
+    </div>
+  </div>
+  <div class="hero-btns">
+    <a class="btn btn-primary" id="play-btn" href="#" target="_blank">▶ Oyunu Oyna</a>
+    <a class="btn btn-ghost" href="#discord">Discord'a Katıl</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- İSTATİSTİKLER -->
+<section id="istatistik">
+  <div class="section-label">Rakamlar</div>
+  <div class="section-title">İstatistikler</div>
+  <div class="stats-grid" id="stats-grid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DUYURULAR -->
+<section id="duyurular">
+  <div class="section-label">Son Haberler</div>
+  <div class="section-title">Duyurular</div>
+  <div class="announcements-list" id="ann-list"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KURALLAR -->
+<section id="kurallar">
+  <div class="section-label">Uyulması Zorunlu</div>
+  <div class="section-title">Sunucu Kuralları</div>
+  <div class="rules-list" id="rules-list"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KARAKTERLERs -->
+<section id="karakterler">
+  <div class="section-label">Roller</div>
+  <div class="section-title">Karakter Sistemi</div>
+  <div class="char-grid" id="char-grid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HARİTA -->
+<section id="harita">
+  <div class="section-label">Bölgeler</div>
+  <div class="section-title">Sunucu Haritası</div>
+  <div class="map-box" id="map-box"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SSS -->
+<section id="sss">
+  <div class="section-label">Yardım</div>
+  <div class="section-title">Sık Sorulan Sorular</div>
+  <div class="faq-list" id="faq-list"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GALERİ -->
+<section id="galeri">
+  <div class="section-label">Ekran Görüntüleri</div>
+  <div class="section-title">Galeri</div>
+  <div class="gallery-grid" id="gallery-grid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LİDERLİK TABLOSU -->
+<section id="liderlik">
+  <div class="section-label">En İyiler</div>
+  <div class="section-title">Liderlik Tablosu</div>
+  <div class="leaderboard">
+    <div class="lb-header">
+      <div>#</div><div>Oyuncu</div><div style="text-align:right">Puan</div><div style="text-align:right">Süre</div>
+    </div>
+    <div id="lb-body"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DESTEK EKİBİ -->
+<section id="destek">
+  <div class="section-label">Ekip</div>
+  <div class="section-title">Destek Ekibi</div>
+  <div class="staff-grid" id="staff-grid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BAŞVURU -->
+<section id="basvuru">
+  <div class="section-label">Ekibe Katıl</div>
+  <div class="section-title">Başvuru Formu</div>
+  <div class="apply-box">
+    <!-- POZİSYON SEÇİMİ -->
+    <div id="apply-select-step">
+      <p class="sub">Hangi pozisyona başvurmak istiyorsun?</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px">
+        <button class="btn btn-ghost" style="flex:1;justify-content:center;font-size:1.1rem" onclick="startApply('moderator')">🛡️ Moderatör</button>
+        <button class="btn btn-ghost" style="flex:1;justify-content:center;font-size:1.1rem" onclick="startApply('builder')">🔨 Builder</button>
+        <button class="btn btn-ghost" style="flex:1;justify-content:center;font-size:1.1rem;border-color:#3498db;color:#3498db" onclick="startApply('polis')">👮 Polis</button>
+      </div>
+    </div>
+
+    <!-- MODERATÖR FORMU -->
+    <form id="form-moderator" style="display:none" onsubmit="submitApply(event,'Moderatör')">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px">
+        <button type="button" onclick="backToSelect()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem">←</button>
+        <span style="font-size:1.1rem;font-weight:700;color:var(--accent)">🛡️ Moderatör Başvurusu</span>
+      </div>
+      <div class="form-group"><label>Roblox Kullanıcı Adı</label><input name="roblox" type="text" placeholder="Roblox adın" required/></div>
+      <div class="form-group"><label>Discord Kullanıcı Adı</label><input name="discord" type="text" placeholder="Discord adın" required/></div>
+      <div class="form-group"><label>Kaç yaşındasın?</label><input name="yas" type="number" min="10" max="99" placeholder="Yaşın" required/></div>
+      <div class="form-group"><label>Günde kaç saat aktif olabilirsin?</label><input name="saat" type="text" placeholder="örn: 3-4 saat" required/></div>
+      <div class="form-group"><label>RDM nedir? Nasıl ceza verirsin?</label><textarea name="rdm" placeholder="Cevabın..." required></textarea></div>
+      <div class="form-group"><label>Bir oyuncu sana hakaret ederse ne yaparsın?</label><textarea name="hakaret" placeholder="Cevabın..." required></textarea></div>
+      <div class="form-group"><label>FailRP ile PowerGaming arasındaki fark nedir?</label><textarea name="failrp" placeholder="Cevabın..." required></textarea></div>
+      <div class="form-group"><label>Metagaming nedir? Gerçek hayattan bir örnek ver.</label><textarea name="meta" placeholder="Cevabın..." required></textarea></div>
+      <div class="form-group"><label>İki oyuncu arasında kavga çıktı, nasıl çözersin?</label><textarea name="kavga" placeholder="Cevabın..." required></textarea></div>
+      <div class="form-group"><label>Neden moderatör olmak istiyorsun?</label><textarea name="neden" placeholder="Cevabın..." required></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Başvuruyu Gönder</button>
+    </form>
+
+    <!-- BUILDER FORMU -->
+    <form id="form-builder" style="display:none" onsubmit="submitApply(event,'Builder')">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px">
+        <button type="button" onclick="backToSelect()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem">←</button>
+        <span style="font-size:1.1rem;font-weight:700;color:var(--accent2)">🔨 Builder Başvurusu</span>
+      </div>
+      <div class="form-group"><label>Roblox Kullanıcı Adı</label><input name="roblox" type="text" placeholder="Roblox adın" required/></div>
+      <div class="form-group"><label>Discord Kullanıcı Adı</label><input name="discord" type="text" placeholder="Discord adın" required/></div>
+      <div class="form-group"><label>Kaç yaşındasın?</label><input name="yas" type="number" min="10" max="99" placeholder="Yaşın" required/></div>
+      <div class="form-group"><label>Kaç yıldır Roblox Studio kullanıyorsun?</label><input name="yil" type="text" placeholder="örn: 2 yıl" required/></div>
+      <div class="form-group"><label>Daha önce hangi projelerde build yaptın? (link varsa ekle)</label><textarea name="projeler" placeholder="Proje adları veya linkleri..." required></textarea></div>
+      <div class="form-group"><label>Hangi build araçlarını kullanıyorsun? (F3X, Studio plugin vb.)</label><textarea name="araclar" placeholder="Cevabın..." required></textarea></div>
+      <div class="form-group"><label>Şehir temalı bir bina yaparken nelere dikkat edersin?</label><textarea name="sehir" placeholder="Cevabın..." required></textarea></div>
+      <div class="form-group"><label>Optimizasyon için neler yaparsın? (part sayısı, union vb.)</label><textarea name="optimizasyon" placeholder="Cevabın..." required></textarea></div>
+      <div class="form-group"><label>Neden DiyarbakırRP için build yapmak istiyorsun?</label><textarea name="neden" placeholder="Cevabın..." required></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;background:linear-gradient(135deg,var(--accent2),#e63946)">Başvuruyu Gönder</button>
+    </form>
+
+    <!-- POLİS FORMU -->
+    <form id="form-polis" style="display:none" onsubmit="submitApply(event,'Polis')">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px">
+        <button type="button" onclick="backToSelect()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem">←</button>
+        <span style="font-size:1.1rem;font-weight:700;color:#3498db">👮 Polis Başvurusu</span>
+      </div>
+      <div class="form-group"><label>Roblox Kullanıcı Adı</label><input name="roblox" type="text" placeholder="Roblox adın" required/></div>
+      <div class="form-group"><label>Discord Kullanıcı Adı</label><input name="discord" type="text" placeholder="Discord adın" required/></div>
+      <div class="form-group"><label>Kaç yaşındasın?</label><input name="yas" type="number" min="10" max="99" placeholder="Yaşın" required/></div>
+      <div class="form-group"><label>Günde kaç saat aktif olabilirsin?</label><input name="saat" type="text" placeholder="örn: 3-4 saat" required/></div>
+      <div class="form-group">
+        <label>Daha önce başka sunucularda polis rolü oynadın mı? Anlat.</label>
+        <textarea name="deneyim" placeholder="Cevabın..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Bir şüpheli kaçmaya çalışıyor, nasıl hareket edersin?</label>
+        <textarea name="kovalama" placeholder="Cevabın..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Silah çeken bir kişiyle karşılaşırsan ne yaparsın?</label>
+        <textarea name="silah" placeholder="Cevabın..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Bir şüpheliyi gözaltına alırken hangi adımları izlersin?</label>
+        <textarea name="gozalti" placeholder="Cevabın..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Sivil bir oyuncu senden yardım isterse nasıl yaklaşırsın?</label>
+        <textarea name="sivil" placeholder="Cevabın..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Ekip arkadaşınla fikir ayrılığına düştüğünde ne yaparsın?</label>
+        <textarea name="ekip" placeholder="Cevabın..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Neden DiyarbakırRP'de polis olmak istiyorsun?</label>
+        <textarea name="neden" placeholder="Cevabın..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;background:linear-gradient(135deg,#3498db,#2980b9)">Başvuruyu Gönder</button>
+    </form>
+
+    <div class="form-success" id="form-success" style="display:none">✔ Başvurun alındı! Discord üzerinden sana ulaşacağız.</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DİSCORD -->
+<section id="discord">
+  <div class="discord-box">
+    <div class="discord-icon">
+      <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+    </div>
+    <h3>Discord Sunucumuza Katıl</h3>
+    <p>Destek almak, duyuruları takip etmek ve toplulukla tanışmak için Discord sunucumuza katıl!</p>
+    <a class="btn btn-discord" id="discord-btn" href="#" target="_blank">Discord'a Katıl</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><span id="footer-name"></span> — Tüm hakları saklıdır &copy; 2025</p>
+  <p style="margin-top:6px;font-size:.78rem">Roblox'ta yayınlandı · Kurucu: <span id="footer-owner"></span></p>
+</footer>
+
+<!-- LİGHT BOX -->
+<div id="lightbox" onclick="document.getElementById('lightbox').classList.remove('open')">
+  <img id="lightbox-img" src="" alt=""/>
+</div>
+
+<!-- GİZLİ TETİKLEYİCİ -->
+<div id="secret-trigger"></div>
+
+<!-- YÖNETİCİ PANELİ -->
+<div id="admin-panel">
+  <div class="admin-box">
+    <h2>⚙ Yönetici Paneli</h2>
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchTab('genel',this)">Genel</button>
+      <button class="admin-tab" onclick="switchTab('duyuru',this)">Duyurular</button>
+      <button class="admin-tab" onclick="switchTab('kural',this)">Kurallar</button>
+      <button class="admin-tab" onclick="switchTab('faq',this)">SSS</button>
+      <button class="admin-tab" onclick="switchTab('galeri',this)">Galeri</button>
+      <button class="admin-tab" onclick="switchTab('lb',this)">Liderlik</button>
+      <button class="admin-tab" onclick="switchTab('karakter',this)">Karakterler</button>
+      <button class="admin-tab" onclick="switchTab('harita',this)">Harita</button>
+      <button class="admin-tab" onclick="switchTab('ekip',this)">Ekip</button>
+      <button class="admin-tab" onclick="switchTab('basvurular',this)">📋 Başvurular</button>
+    </div>
+
+    <!-- GENEL -->
+    <div class="admin-tab-content active" id="tab-genel">
+      <div class="admin-section"><label>Oyun Adı</label><input id="ap-gameName" type="text"/></div>
+      <div class="admin-section"><label>Oyun Açıklaması</label><input id="ap-gameDesc" type="text"/></div>
+      <div class="admin-section"><label>Kurucu (Roblox adı)</label><input id="ap-ownerRoblox" type="text"/></div>
+      <div class="admin-section"><label>Discord Davet Linki</label><input id="ap-discordLink" type="text"/></div>
+      <div class="admin-section"><label>Roblox Grup / Oyun Linki</label><input id="ap-robloxLink" type="text"/></div>
+      <div class="admin-section"><label>Yeni Şifre (boş = değişmez)</label><input id="ap-newpass" type="password" placeholder="Yeni şifre"/></div>
+      <div class="admin-section">
+        <label>İstatistikler (rakam | etiket)</label>
+        <div class="list-edit" id="ap-stats"></div>
+        <button class="btn-add" onclick="addStat()">+ Stat Ekle</button>
+      </div>
+    </div>
+
+    <!-- DUYURULAR -->
+    <div class="admin-tab-content" id="tab-duyuru">
+      <div class="list-edit" id="ap-ann"></div>
+      <button class="btn-add" onclick="addAnn()">+ Duyuru Ekle</button>
+    </div>
+
+    <!-- KURALLAR -->
+    <div class="admin-tab-content" id="tab-kural">
+      <div class="list-edit" id="ap-rules"></div>
+      <button class="btn-add" onclick="addRule()">+ Kural Ekle</button>
+    </div>
+
+    <!-- SSS -->
+    <div class="admin-tab-content" id="tab-faq">
+      <div class="list-edit" id="ap-faq"></div>
+      <button class="btn-add" onclick="addFaq()">+ Soru Ekle</button>
+    </div>
+
+    <!-- GALERİ -->
+    <div class="admin-tab-content" id="tab-galeri">
+      <p style="color:var(--muted);font-size:.88rem;margin-bottom:16px">Görsel URL'si (imgur, discord cdn vb.) ve etiket yaz.</p>
+      <div class="list-edit" id="ap-gallery"></div>
+      <button class="btn-add" onclick="addGallery()">+ Görsel Ekle</button>
+    </div>
+
+    <!-- LİDERLİK -->
+    <div class="admin-tab-content" id="tab-lb">
+      <div class="list-edit" id="ap-lb"></div>
+      <button class="btn-add" onclick="addLb()">+ Oyuncu Ekle</button>
+    </div>
+
+    <!-- EKİP -->
+    <div class="admin-tab-content" id="tab-ekip">
+      <div class="list-edit" id="ap-staff"></div>
+      <button class="btn-add" onclick="addStaff()">+ Üye Ekle</button>
+    </div>
+
+    <!-- KARAKTERLERs -->
+    <div class="admin-tab-content" id="tab-karakter">
+      <div class="list-edit" id="ap-chars"></div>
+      <button class="btn-add" onclick="addChar()">+ Karakter Ekle</button>
+    </div>
+
+    <!-- HARİTA -->
+    <div class="admin-tab-content" id="tab-harita">
+      <div class="admin-section">
+        <label>Harita Görseli URL (imgur, discord CDN vb.)</label>
+        <input id="ap-mapUrl" type="text" placeholder="https://..."/>
+      </div>
+      <div class="admin-section">
+        <label>Harita Başlığı</label>
+        <input id="ap-mapLabel" type="text"/>
+      </div>
+    </div>
+
+    <!-- BAŞVURULAR -->
+    <div class="admin-tab-content" id="tab-basvurular">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <span style="color:var(--muted);font-size:.85rem">Gelen başvurular burada listelenir.</span>
+        <button class="btn-remove" onclick="clearApplications()">Tümünü Sil</button>
+      </div>
+      <div id="ap-basvurular-list"></div>
+    </div>
+
+    <div class="admin-btns">
+      <button class="btn btn-ghost" onclick="closeAdmin()">İptal</button>
+      <button class="btn btn-primary" onclick="saveAdmin()">Kaydet</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =================== RENDER =================== */
+function loadConfig(){
+  const s=localStorage.getItem('dyrp_cfg');
+  if(s){const p=JSON.parse(s);Object.keys(p).forEach(k=>CONFIG[k]=p[k])}
+  const sp=localStorage.getItem('dyrp_pass');
+  window._pass=sp||ADMIN_PASSWORD;
+}
+
+function applyConfig(){
+  const c=CONFIG;
+  document.title=c.gameName;
+  setText('nav-logo',c.gameName);setText('hero-title',c.gameName);setText('hero-desc',c.gameDesc);
+  setText('owner-av',c.ownerRoblox.charAt(0).toUpperCase());setText('owner-name',c.ownerRoblox);
+  setHref('play-btn',c.robloxLink);setHref('roblox-nav',c.robloxLink);setHref('discord-btn',c.discordLink);
+  setText('footer-name',c.gameName);setText('footer-owner',c.ownerRoblox);
+  setText('apply-title-el',c.applyTitle||'Başvuru');setText('apply-sub-el',c.applySub||'');
+  renderStats();renderAnn();renderRules();renderFaq();renderGallery();renderLb();renderStaff();renderCharacters();renderMap();renderBanner();
+}
+function setText(id,v){const e=document.getElementById(id);if(e)e.textContent=v}
+function setHref(id,v){const e=document.getElementById(id);if(e)e.href=v}
+
+function renderStats(){
+  const g=document.getElementById('stats-grid');g.innerHTML='';
+  CONFIG.stats.forEach(s=>{
+    const d=document.createElement('div');d.className='stat-card';
+    d.innerHTML=`<div class="stat-num">${s.num}</div><div class="stat-label">${s.label}</div>`;
+    g.appendChild(d);
+  });
+}
+
+function renderAnn(){
+  const l=document.getElementById('ann-list');l.innerHTML='';
+  CONFIG.announcements.forEach(a=>{
+    const d=document.createElement('div');d.className='ann-card';
+    d.innerHTML=`<div class="ann-icon">${a.emoji}</div>
+    <div class="ann-body"><div class="ann-date">${a.date}</div>
+    <div class="ann-title">${a.title}</div><div class="ann-text">${a.text}</div></div>`;
+    l.appendChild(d);
+  });
+}
+
+function renderRules(){
+  const l=document.getElementById('rules-list');l.innerHTML='';
+  CONFIG.rules.forEach((r,i)=>{
+    const d=document.createElement('div');d.className='rule-item';
+    d.innerHTML=`<div class="rule-num">${String(i+1).padStart(2,'0')}</div>
+    <div><div class="rule-cat">${r.cat}</div><div class="rule-text">${r.text}</div></div>`;
+    l.appendChild(d);
+  });
+}
+
+function renderFaq(){
+  const l=document.getElementById('faq-list');l.innerHTML='';
+  CONFIG.faq.forEach((f,i)=>{
+    const d=document.createElement('div');d.className='faq-item';
+    d.innerHTML=`<div class="faq-q" onclick="toggleFaq(this.parentElement)">${f.q}</div>
+    <div class="faq-a">${f.a}</div>`;
+    l.appendChild(d);
+  });
+}
+function toggleFaq(el){el.classList.toggle('open')}
+
+function renderGallery(){
+  const g=document.getElementById('gallery-grid');g.innerHTML='';
+  CONFIG.gallery.forEach((item,i)=>{
+    const d=document.createElement('div');d.className='gallery-item';
+    if(item.url){
+      d.innerHTML=`<img src="${item.url}" alt="${item.label}" loading="lazy"/><div class="gallery-label">${item.label}</div>`;
+      d.onclick=()=>{document.getElementById('lightbox-img').src=item.url;document.getElementById('lightbox').classList.add('open')};
+    } else {
+      d.innerHTML=`<div class="gallery-placeholder"><span>🖼️</span><span>${item.label}</span><span style="font-size:.65rem">URL ekle</span></div>`;
+    }
+    g.appendChild(d);
+  });
+}
+
+function renderLb(){
+  const b=document.getElementById('lb-body');b.innerHTML='';
+  const rankClass=['gold','silver','bronze'];
+  CONFIG.leaderboard.forEach((p,i)=>{
+    const d=document.createElement('div');d.className='lb-row';
+    const rc=rankClass[i]||'';
+    d.innerHTML=`<div class="lb-rank ${rc}">${i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1}</div>
+    <div class="lb-player"><div class="lb-av" style="background:${p.color}">${p.name.charAt(0).toUpperCase()}</div><div class="lb-name">${p.name}</div></div>
+    <div class="lb-score">${p.score.toLocaleString()}</div>
+    <div class="lb-time">${p.time}</div>`;
+    b.appendChild(d);
+  });
+}
+
+function renderStaff(){
+  const g=document.getElementById('staff-grid');g.innerHTML='';
+  CONFIG.staff.forEach(s=>{
+    const d=document.createElement('div');d.className='staff-card';
+    d.innerHTML=`<div class="staff-av" style="background:${s.color}">${s.name.charAt(0).toUpperCase()}</div>
+    <div class="staff-name">${s.name}</div><div class="staff-role" style="color:${s.color}">${s.role}</div>`;
+    g.appendChild(d);
+  });
+}
+
+/* =================== KARAKTERLEr =================== */
+function renderCharacters(){
+  const g=document.getElementById('char-grid');if(!g)return;g.innerHTML='';
+  CONFIG.characters.forEach(c=>{
+    const d=document.createElement('div');d.className='char-card';
+    d.style.setProperty('--cc',c.color);
+    d.innerHTML=`<div class="char-emoji">${c.emoji}</div>
+    <div class="char-name" style="color:${c.color}">${c.name}</div>
+    <div class="char-desc">${c.desc}</div>
+    <div class="char-slots" style="color:${c.color}">${c.slots}</div>`;
+    d.querySelector('.char-card::before');
+    d.style.borderTop=`3px solid ${c.color}`;
+    g.appendChild(d);
+  });
+}
+
+/* =================== HARİTA =================== */
+function renderMap(){
+  const b=document.getElementById('map-box');if(!b)return;
+  if(CONFIG.mapUrl){
+    b.innerHTML=`<img class="map-img" src="${CONFIG.mapUrl}" alt="Harita"/><div class="map-label">${CONFIG.mapLabel||''}</div>`;
+  } else {
+    b.innerHTML=`<div class="map-placeholder"><div class="mp-icon">🗺️</div><div class="mp-text">${CONFIG.mapLabel||'Harita'}</div><div style="font-size:.78rem;margin-top:4px">Admin panelinden harita görseli ekle</div></div>`;
+  }
+}
+
+/* =================== BANNER =================== */
+function renderBanner(){
+  const dismissed=sessionStorage.getItem('banner_dismissed');
+  if(dismissed)return;
+  const ann=CONFIG.announcements;
+  if(!ann||!ann.length)return;
+  const latest=ann[0];
+  const el=document.getElementById('ann-banner');
+  const txt=document.getElementById('banner-text');
+  if(txt)txt.textContent=`${latest.title} — ${latest.text.substring(0,60)}${latest.text.length>60?'...':''}`;
+  if(el){setTimeout(()=>{el.classList.add('show');document.body.classList.add('banner-active');},800);}
+}
+function closeBanner(e){
+  e.stopPropagation();
+  const el=document.getElementById('ann-banner');
+  el.classList.remove('show');
+  document.body.classList.remove('banner-active');
+  sessionStorage.setItem('banner_dismissed','1');
+}
+function scrollToDuyuru(){document.getElementById('duyurular').scrollIntoView({behavior:'smooth'});}
+
+/* =================== TEMA =================== */
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  const isLight=document.body.classList.contains('light');
+  document.getElementById('theme-btn').textContent=isLight?'🌙':'☀️';
+  localStorage.setItem('dyrp_theme',isLight?'light':'dark');
+}
+function loadTheme(){
+  const t=localStorage.getItem('dyrp_theme');
+  if(t==='light'){document.body.classList.add('light');document.getElementById('theme-btn').textContent='🌙';}
+  else{document.getElementById('theme-btn').textContent='☀️';}
+}
+function startApply(type){
+  document.getElementById('apply-select-step').style.display='none';
+  document.getElementById('form-moderator').style.display= type==='moderator'?'block':'none';
+  document.getElementById('form-builder').style.display  = type==='builder'  ?'block':'none';
+  document.getElementById('form-polis').style.display    = type==='polis'    ?'block':'none';
+}
+function backToSelect(){
+  document.getElementById('apply-select-step').style.display='block';
+  document.getElementById('form-moderator').style.display='none';
+  document.getElementById('form-builder').style.display='none';
+  document.getElementById('form-polis').style.display='none';
+}
+function submitApply(e, role){
+  e.preventDefault();
+  const form=e.target;
+  const data={role, tarih: new Date().toLocaleString('tr-TR'), cevaplar:{}};
+  Array.from(form.elements).forEach(el=>{if(el.name)data.cevaplar[el.name]=el.value;});
+  const apps=JSON.parse(localStorage.getItem('dyrp_apps')||'[]');
+  apps.unshift(data);
+  localStorage.setItem('dyrp_apps',JSON.stringify(apps));
+  form.style.display='none';
+  document.getElementById('apply-select-step').style.display='none';
+  document.getElementById('form-success').style.display='block';
+}
+
+/* =================== BAŞVURU ADMIN =================== */
+function renderApplications(){
+  const list=document.getElementById('ap-basvurular-list');
+  if(!list)return;
+  const apps=JSON.parse(localStorage.getItem('dyrp_apps')||'[]');
+  if(!apps.length){list.innerHTML='<div class="app-empty">Henüz başvuru yok.</div>';return;}
+  list.innerHTML='';
+  const labelMap={
+    roblox:'Roblox Adı',discord:'Discord Adı',yas:'Yaş',saat:'Günlük Saat',yil:'Studio Yılı',
+    rdm:'RDM nedir?',hakaret:'Hakarete tepki?',failrp:'FailRP vs PowerGaming?',
+    meta:'Metagaming nedir?',kavga:'Kavga çözümü?',neden:'Neden başvuruyorsun?',
+    projeler:'Önceki projeler',araclar:'Kullandığı araçlar',sehir:'Şehir inşasında dikkat',optimizasyon:'Optimizasyon',
+    deneyim:'Polis deneyimi',kovalama:'Kaçan şüpheli',silah:'Silah çeken kişi',
+    gozalti:'Gözaltı prosedürü',sivil:'Sivile yaklaşım',ekip:'Ekip uyuşmazlığı'
+  };
+  apps.forEach((app,i)=>{
+    const isBuilder=app.role==='Builder';
+    const card=document.createElement('div');card.className='app-card';
+    let qa='';
+    Object.entries(app.cevaplar).forEach(([k,v])=>{
+      if(!v)return;
+      qa+=`<div class="app-q">${labelMap[k]||k}</div><div class="app-a">${v}</div>`;
+    });
+    card.innerHTML=`
+      <div class="app-card-header">
+        <div class="app-card-name">${app.cevaplar.roblox||'?'}</div>
+        <span class="app-card-role ${isBuilder?'builder':''}">${app.role}</span>
+      </div>
+      <div class="app-card-date">${app.tarih}</div>
+      <details><summary style="cursor:pointer;color:var(--muted);font-size:.85rem;margin-bottom:6px">Cevapları Gör ▸</summary>
+      <div class="app-qa">${qa}</div></details>
+      <div style="text-align:right;margin-top:10px">
+        <button class="btn-remove" onclick="deleteApp(${i})">Sil</button>
+      </div>`;
+    list.appendChild(card);
+  });
+}
+function deleteApp(i){
+  const apps=JSON.parse(localStorage.getItem('dyrp_apps')||'[]');
+  apps.splice(i,1);
+  localStorage.setItem('dyrp_apps',JSON.stringify(apps));
+  renderApplications();
+}
+function clearApplications(){
+  if(confirm('Tüm başvurular silinecek. Emin misin?')){
+    localStorage.removeItem('dyrp_apps');
+    renderApplications();
+  }
+}
+
+/* =================== MOBİL MENÜ =================== */
+function toggleMenu(){document.getElementById('nav-links').classList.toggle('open')}
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav-links').classList.remove('open')));
+
+/* =================== GİZLİ TETİKLEYİCİ =================== */
+let _cc=0,_ct=null;
+document.getElementById('secret-trigger').addEventListener('click',()=>{
+  _cc++;clearTimeout(_ct);_ct=setTimeout(()=>_cc=0,1500);
+  if(_cc>=5){_cc=0;const p=prompt('Yönetici şifresi:');if(p===window._pass)openAdmin();else if(p!==null)alert('Yanlış şifre!');}
+});
+
+/* =================== ADMİN PANELİ =================== */
+function switchTab(name,btn){
+  document.querySelectorAll('.admin-tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+}
+
+function openAdmin(){
+  // Genel
+  val('ap-gameName',CONFIG.gameName);val('ap-gameDesc',CONFIG.gameDesc);
+  val('ap-ownerRoblox',CONFIG.ownerRoblox);val('ap-discordLink',CONFIG.discordLink);
+  val('ap-robloxLink',CONFIG.robloxLink);val('ap-newpass','');
+  // İstatistik
+  renderListEdit('ap-stats', CONFIG.stats, s=>`
+    <input type="text" value="${s.num}" placeholder="Rakam" data-f="num" style="max-width:90px"/>
+    <input type="text" value="${s.label}" placeholder="Etiket" data-f="label"/>`);
+  // Duyurular
+  renderListEdit('ap-ann', CONFIG.announcements, a=>`
+    <input type="text" value="${a.emoji}" placeholder="Emoji" style="max-width:54px" data-f="emoji"/>
+    <input type="text" value="${a.date}" placeholder="Tarih" style="max-width:120px" data-f="date"/>
+    <input type="text" value="${a.title}" placeholder="Başlık" data-f="title"/>
+    <input type="text" value="${a.text}" placeholder="Metin" data-f="text"/>`);
+  // Kurallar
+  renderListEdit('ap-rules', CONFIG.rules, r=>`
+    <input type="text" value="${r.cat}" placeholder="Kategori" style="max-width:110px" data-f="cat"/>
+    <input type="text" value="${r.text}" placeholder="Kural metni" data-f="text"/>`);
+  // SSS
+  renderListEdit('ap-faq', CONFIG.faq, f=>`
+    <input type="text" value="${f.q}" placeholder="Soru" data-f="q"/>
+    <input type="text" value="${f.a}" placeholder="Cevap" data-f="a"/>`);
+  // Galeri
+  renderListEdit('ap-gallery', CONFIG.gallery, g=>`
+    <input type="text" value="${g.url}" placeholder="Görsel URL" data-f="url"/>
+    <input type="text" value="${g.label}" placeholder="Etiket" style="max-width:130px" data-f="label"/>`);
+  // Liderlik
+  renderListEdit('ap-lb', CONFIG.leaderboard, p=>`
+    <input type="text" value="${p.name}" placeholder="Oyuncu adı" data-f="name"/>
+    <input type="number" value="${p.score}" placeholder="Puan" style="max-width:90px" data-f="score"/>
+    <input type="text" value="${p.time}" placeholder="Süre" style="max-width:90px" data-f="time"/>
+    <input type="color" value="${p.color}" data-f="color" style="width:38px;padding:2px;flex-shrink:0"/>`);
+  // Ekip
+  renderListEdit('ap-staff', CONFIG.staff, s=>`
+    <input type="text" value="${s.name}" placeholder="Kullanıcı adı" data-f="name"/>
+    <input type="text" value="${s.role}" placeholder="Rol" style="max-width:130px" data-f="role"/>
+    <input type="color" value="${s.color}" data-f="color" style="width:38px;padding:2px;flex-shrink:0"/>`);
+
+  // Karakterler
+  renderListEdit('ap-chars', CONFIG.characters, c=>`
+    <input type="text" value="${c.emoji}" placeholder="Emoji" style="max-width:54px" data-f="emoji"/>
+    <input type="text" value="${c.name}" placeholder="İsim" style="max-width:100px" data-f="name"/>
+    <input type="text" value="${c.desc}" placeholder="Açıklama" data-f="desc"/>
+    <input type="text" value="${c.slots}" placeholder="Slot" style="max-width:110px" data-f="slots"/>
+    <input type="color" value="${c.color}" data-f="color" style="width:38px;padding:2px;flex-shrink:0"/>`);
+  // Harita
+  val('ap-mapUrl',  CONFIG.mapUrl||'');
+  val('ap-mapLabel',CONFIG.mapLabel||'');
+
+  document.getElementById('admin-panel').classList.add('open');
+  renderApplications();
+}
+
+function renderListEdit(containerId, arr, rowFn){
+  const c=document.getElementById(containerId);c.innerHTML='';
+  arr.forEach((item,i)=>{
+    const row=document.createElement('div');row.className='list-row';row.dataset.idx=i;
+    row.innerHTML=rowFn(item)+`<button class="btn-remove" onclick="removeRow('${containerId}',${i})">Sil</button>`;
+    c.appendChild(row);
+  });
+}
+
+function removeRow(containerId, idx){
+  const map={
+    'ap-stats':'stats','ap-ann':'announcements','ap-rules':'rules',
+    'ap-faq':'faq','ap-gallery':'gallery','ap-lb':'leaderboard',
+    'ap-staff':'staff','ap-chars':'characters'
+  };
+  const key=map[containerId];
+  if(!key) return;
+  CONFIG[key].splice(idx,1);
+  // Sadece ilgili listeyi yeniden çiz, tüm paneli açma
+  if(containerId==='ap-chars'){
+    renderCharsEdit();
+  } else {
+    openAdmin();
+    switchActiveTab();
+  }
+}
+
+function renderCharsEdit(){
+  const list=document.getElementById('ap-chars');
+  if(!list) return;
+  list.innerHTML='';
+  CONFIG.characters.forEach((c,i)=>{
+    const row=document.createElement('div');
+    row.className='list-row';
+    row.dataset.idx=i;
+    row.innerHTML=`
+      <input type="text" value="${c.emoji}" placeholder="Emoji" style="max-width:54px" data-f="emoji"/>
+      <input type="text" value="${c.name}" placeholder="İsim" style="max-width:100px" data-f="name"/>
+      <input type="text" value="${c.desc}" placeholder="Açıklama" data-f="desc"/>
+      <input type="text" value="${c.slots}" placeholder="Slot" style="max-width:110px" data-f="slots"/>
+      <input type="color" value="${c.color}" data-f="color" style="width:38px;padding:2px;flex-shrink:0"/>
+      <button class="btn-remove" onclick="removeRow('ap-chars',${i})">Sil</button>`;
+    list.appendChild(row);
+  });
+}
+
+function switchActiveTab(){
+  const active=document.querySelector('.admin-tab.active');
+  if(active)active.click();
+}
+
+function addStat(){CONFIG.stats.push({num:'0',label:'Yeni'});openAdmin();document.querySelector('[onclick*="stat"]').click();}
+function addAnn(){CONFIG.announcements.unshift({emoji:'📢',date:new Date().toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'}),title:'Yeni Duyuru',text:'Duyuru metni...'});openAdmin();document.querySelectorAll('.admin-tab')[1].click();}
+function addRule(){CONFIG.rules.push({cat:'Genel',text:'Yeni kural...'});openAdmin();document.querySelectorAll('.admin-tab')[2].click();}
+function addFaq(){CONFIG.faq.push({q:'Yeni soru?',a:'Cevap...'});openAdmin();document.querySelectorAll('.admin-tab')[3].click();}
+function addGallery(){CONFIG.gallery.push({url:'',label:'Yeni'});openAdmin();document.querySelectorAll('.admin-tab')[4].click();}
+function addLb(){CONFIG.leaderboard.push({name:'Oyuncu',score:0,time:'0 saat',color:'#5865F2'});openAdmin();document.querySelectorAll('.admin-tab')[5].click();}
+function addChar(){
+  CONFIG.characters.push({emoji:'🧑',name:'Yeni',desc:'Açıklama...',slots:'Slot: ?',color:'#9b59b6'});
+  renderCharsEdit();
+}
+function addStaff(){CONFIG.staff.push({name:'Kullanici',role:'Destek',color:'#5865F2'});openAdmin();document.querySelectorAll('.admin-tab')[7].click();}
+
+function val(id,v){const e=document.getElementById(id);if(e)e.value=v;}
+function gval(id){const e=document.getElementById(id);return e?e.value:'';}
+
+function collectList(containerId, fields){
+  const rows=document.querySelectorAll(`#${containerId} .list-row`);
+  return Array.from(rows).map(row=>{
+    const obj={};
+    fields.forEach(f=>{
+      const inp=row.querySelector(`[data-f="${f}"]`);
+      obj[f]=inp?(f==='score'?parseInt(inp.value)||0:inp.value):'';
+    });
+    return obj;
+  });
+}
+
+function saveAdmin(){
+  CONFIG.gameName    = gval('ap-gameName')    || CONFIG.gameName;
+  CONFIG.gameDesc    = gval('ap-gameDesc')    || CONFIG.gameDesc;
+  CONFIG.ownerRoblox = gval('ap-ownerRoblox') || CONFIG.ownerRoblox;
+  CONFIG.discordLink = gval('ap-discordLink') || CONFIG.discordLink;
+  CONFIG.robloxLink  = gval('ap-robloxLink')  || CONFIG.robloxLink;
+
+  CONFIG.stats         = collectList('ap-stats',  ['num','label']);
+  CONFIG.announcements = collectList('ap-ann',    ['emoji','date','title','text']);
+  CONFIG.rules         = collectList('ap-rules',  ['cat','text']);
+  CONFIG.faq           = collectList('ap-faq',    ['q','a']);
+  CONFIG.gallery       = collectList('ap-gallery',['url','label']);
+  CONFIG.leaderboard   = collectList('ap-lb',     ['name','score','time','color']);
+  CONFIG.staff         = collectList('ap-staff',  ['name','role','color']);
+
+  CONFIG.characters   = collectList('ap-chars', ['emoji','name','desc','slots','color']);
+  CONFIG.mapUrl       = gval('ap-mapUrl').trim();
+  CONFIG.mapLabel     = gval('ap-mapLabel').trim();
+
+  const np=gval('ap-newpass').trim();
+  if(np){window._pass=np;localStorage.setItem('dyrp_pass',np);}
+
+  localStorage.setItem('dyrp_cfg',JSON.stringify(CONFIG));
+  applyConfig();
+  closeAdmin();
+}
+
+function closeAdmin(){document.getElementById('admin-panel').classList.remove('open');}
+document.getElementById('admin-panel').addEventListener('click',function(e){if(e.target===this)closeAdmin();});
+
+/* =================== BAŞLAT =================== */
+loadConfig();
+loadTheme();
+applyConfig();
+</script>
+</body>
+</html>
